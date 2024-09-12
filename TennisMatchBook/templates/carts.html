@@ -1,0 +1,138 @@
+<html>
+<body>
+    <center>
+        <h1 style = "background-color: rgb(33, 193, 193); color: red">Tickets</h1>
+    </center>
+    <div>
+        <style>
+            .dropdown {
+                display: inline-block;
+                position: relative;
+
+            }
+
+            button{
+                border:none;
+                border-radius:5px;
+                padding:15px 30px;
+                font-size:18px;
+                cursor:pointer;
+            }
+
+            button:hover{
+                background-color:#ddd;
+            }
+
+            .dropdown-options {
+                display: none;
+                position: absolute;
+                overflow: auto;
+                background-color:#fff;
+                border-radius:5px;
+                box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+
+            .dropdown:hover .dropdown-options {
+                display: block;
+            }
+
+            .dropdown-options a {
+                display: block;
+                color: #000000;
+                padding: 5px;
+                text-decoration: none;
+                padding:20px 40px;
+            }
+
+            .dropdown-options a:hover {
+                color: #0a0a23;
+                background-color: #ddd;
+                border-radius:5px;
+            }
+            select {
+                border:none;
+                padding: 10px 20px;
+                border-radius:5px;
+            }
+
+            select:focus{
+                outline:none;
+            }
+
+            th {
+                left: 300px;
+            }
+
+            td {
+                   width: 150px;
+                   text-align: center;
+                   padding: 5px;
+                   left: 300px;
+                }
+        </style>
+        <a href = "{{url_for('us_open')}}" style = "position: relative; left: 30px;">Back</a>
+        <style>
+           th {
+                left: 300px;
+            }
+
+            td {
+                   width: 150px;
+                   text-align: center;
+                   padding: 5px;
+                   left: 300px;
+                } 
+        </style>
+        <center>
+        <table>
+            <thead>
+              <tr>
+                <th>Match Number</th>
+                <th>Player One</th>
+                <th>Player Two</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Stadium</th>
+                <th>Number of Tickets</th>
+              </tr>
+            </thead>  
+        <tbody>  
+        {% for i in range(len) %}
+        <tr>
+            <td>{{ data[i][0] }}</td>
+            <td>{{ data[i][1] }}</td>
+            <td>{{ data[i][2] }}</td>
+            <td>{{ data[i][3] }}</td>
+            <td>{{ data[i][4] }}{{ data[i][5] }}</td>
+            <td>{{ data[i][6] }}</td>
+            <td><div class="dropdown">
+                <button>{{ data[i][7] }}</button>
+                <div class="dropdown-options">
+                  <a href="{{url_for('update', num = 1, id = data[i][0])}}">1</a>
+                  <a href="{{url_for('update', num = 2, id = data[i][0])}}">2</a>
+                  <a href="{{url_for('update', num = 3, id = data[i][0])}}">3</a>
+                  <a href="{{url_for('update', num = 4, id = data[i][0])}}">4</a>
+                  <a href="{{url_for('update', num = 5, id = data[i][0])}}">5</a>
+                  <a href="{{url_for('update', num = 6, id = data[i][0])}}">6</a>
+                  <a href="{{url_for('update', num = 7, id = data[i][0])}}">7</a>
+                  <a href="{{url_for('update', num = 8, id = data[i][0])}}">8</a>
+                  <a href="{{url_for('update', num = 9, id = data[i][0])}}">9</a>
+                  <a href="{{url_for('update', num = 10, id = data[i][0])}}">10</a>
+                </div>
+            </div></td>
+            <td><a href = "{{ url_for('carts', eid = data[i][0]) }}" ><label name = "Delete">Delete</label></a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </center>
+        <center>
+        <form action = "{{ url_for('booked') }}" method = "POST">
+            <h1><input type = "submit" value = "Submit" /></h1>
+        </form>
+        </center>
+    </div>
+
+</body>
+</html>
